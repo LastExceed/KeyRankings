@@ -36,6 +36,7 @@
             this.labelHint = new System.Windows.Forms.Label();
             this.progressBarUser = new System.Windows.Forms.ProgressBar();
             this.progressBarTotal = new System.Windows.Forms.ProgressBar();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownKeymode)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,7 +101,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(85, 39);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 23);
+            this.button1.Size = new System.Drawing.Size(41, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "Run";
             this.button1.UseVisualStyleBackColor = true;
@@ -160,11 +161,23 @@
             this.progressBarTotal.Step = 1;
             this.progressBarTotal.TabIndex = 13;
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(126, 45);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(71, 13);
+            this.linkLabel1.TabIndex = 14;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "info on github";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(195, 297);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.progressBarTotal);
             this.Controls.Add(this.progressBarUser);
             this.Controls.Add(this.labelHint);
@@ -200,6 +213,7 @@
         private System.Windows.Forms.Label labelHint;
         private System.Windows.Forms.ProgressBar progressBarUser;
         private System.Windows.Forms.ProgressBar progressBarTotal;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 

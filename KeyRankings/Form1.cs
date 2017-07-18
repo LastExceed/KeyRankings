@@ -170,5 +170,10 @@ namespace KeySpecificRankings {
             textBoxKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25f);
             textBoxKey.PasswordChar = Char.Parse("•");
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            System.Diagnostics.Process.Start("http://github.com/LastExceed/KeyRankings");
+            linkLabel1.LinkVisited = true;
+        }
     }
 }
