@@ -1,4 +1,4 @@
-﻿namespace KeySpecificRankings {
+﻿namespace KeyRankings {
     class Score {
         public int beatmap_id;
         public int score;

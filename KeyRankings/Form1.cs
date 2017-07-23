@@ -9,10 +9,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace KeySpecificRankings {
+namespace KeyRankings {
     public partial class Form1 : Form {
         const string website = "http://osu.ppy.sh/";
-        List<KeyValuePair<string, Double>> results;
+        List<Result> results;
         int previousOrder = -1;
         Thread thatThread;
 
@@ -22,7 +22,6 @@ namespace KeySpecificRankings {
 
         private void button1_Click(object sender, EventArgs e) {
             button1.Enabled = false;
-            numericUpDownKeymode.Enabled = false;
             textBoxCountryTag.Enabled = false;
             progressBarTotal.Value = progressBarTotal.Minimum;
             progressBarUser.Value = progressBarUser.Minimum;
@@ -69,7 +68,6 @@ namespace KeySpecificRankings {
             } else {
                 maps = new Dictionary<int, float>();
             }
-            int targetKeymode = (int)numericUpDownKeymode.Value;
             string APIkey = textBoxKey.Text;
             var url = string.Format("{0}p/pp/?m=3&c={1}", website, textBoxCountryTag.Text);
 
@@ -84,17 +82,18 @@ namespace KeySpecificRankings {
 
 
 
-            results = new List<KeyValuePair<string, Double>>();
+            results = new List<Result>();
             foreach (HtmlNode user in users) {
                 Invoke(new Action(() => progressBarUser.Value = progressBarUser.Minimum));
-                Double PP = 0;
-                int count = 0;
-                string username = user.ChildNodes[3].LastChild.InnerText;
-                ListViewItem listViewItem = new ListViewItem(username);
-                listViewItem.SubItems.Add("" + PP);
+                Result result = new Result();
+                result.name = user.ChildNodes[3].LastChild.InnerText;
+                ListViewItem listViewItem = new ListViewItem(result.name);
+                for (int i = 0; i < 6; i++) {
+                    listViewItem.SubItems.Add("0");
+                }
                 Invoke(new Action(() => listView1.Items.Add(listViewItem)));
 
-                url = string.Format("{0}api/get_user_best?k={1}&u={2}&m=3&limit=1000", website, APIkey, username);
+                url = string.Format("{0}api/get_user_best?k={1}&u={2}&m=3&limit=1000", website, APIkey, result.name);
                 Score[] scores = JsonConvert.DeserializeObject<Score[]>(GetHttp(url));
                 Invoke(new Action(() => progressBarUser.Maximum = scores.Length + 1));
                 foreach (Score score in scores) {
@@ -106,22 +105,30 @@ namespace KeySpecificRankings {
                         url = string.Format("{0}api/get_beatmaps?k={1}&b={2}", website, APIkey, beatmap_id);
                         Beatmap[] beatmaps = JsonConvert.DeserializeObject<Beatmap[]>(GetHttp(url));
                         keymode = beatmaps[0].diff_size;
+                        
                         maps.Add(beatmap_id, keymode);
                         File.WriteAllText("maps.json", JsonConvert.SerializeObject(maps));
                     }
-                    if (keymode == targetKeymode) {
-                        PP += score.pp * Math.Pow(0.95, count);
-                        Invoke(new Action(() => listViewItem.SubItems[1].Text = "" + PP));
-                        count++;
+                    if (keymode < 4) {
+                        keymode = 3; //autoconverts, keymod is TODO
                     }
+                    result.pp[(int)keymode] += score.pp * Math.Pow(0.95, result.count[(int)keymode]);
+                    Invoke(new Action(() => listViewItem.SubItems[(int)keymode-3].Text = "" + result.pp[(int)keymode]));
+                    result.count[(int)keymode]++;
                     Invoke(new Action(() => StepInstant(progressBarUser)));
                 }
                 int rankedPlays = int.Parse(user.ChildNodes[11].InnerText.Replace(",", ""));
                 rankedPlays += int.Parse(user.ChildNodes[13].InnerText.Replace(",", ""));
                 rankedPlays += int.Parse(user.ChildNodes[15].InnerText.Replace(",", ""));
-                PP += 416.666666667 * (1 - Math.Pow(0.9994, rankedPlays));
-                Invoke(new Action(() => listViewItem.SubItems[1].Text = "" + PP));
-                results.Add(new KeyValuePair<string, double>(username, PP));
+                int totalcount = 0;
+                for (int i = 4; i < 10; i++) {
+                    totalcount += result.count[i];
+                }
+                for (int i = 4; i < 10; i++) {
+                    result.pp[i] += 416.666666667 * (1 - Math.Pow(0.9994, rankedPlays * (result.count[i] / totalcount)));
+                    Invoke(new Action(() => listViewItem.SubItems[i-3].Text = "" + result.pp[i]));
+                }
+                results.Add(result);
                 Invoke(new Action(() => StepInstant(progressBarTotal)));
             }
             Invoke(new Action(() => Finish()));
@@ -129,7 +136,6 @@ namespace KeySpecificRankings {
         public void Finish() {
             progressBarTotal.Value = progressBarTotal.Maximum;
             progressBarUser.Value = progressBarUser.Maximum;
-            numericUpDownKeymode.Enabled = true;
             textBoxCountryTag.Enabled = true;
             button1.Enabled = true;
         }
@@ -142,25 +148,23 @@ namespace KeySpecificRankings {
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e) {
             if (e.Column == 0) {
                 if (previousOrder == e.Column) {
-                    results = results.OrderByDescending(x => x.Key).ToList();
+                    results = results.OrderByDescending(x => x.name).ToList();
                     previousOrder = -1;
                 } else {
-                    results = results.OrderBy(x => x.Key).ToList();
+                    results = results.OrderBy(x => x.name).ToList();
                     previousOrder = e.Column;
                 }
             } else {
-                if (previousOrder == e.Column) {
-                    results = results.OrderBy(x => x.Value).ToList();
-                    previousOrder = -1;
-                } else {
-                    results = results.OrderByDescending(x => x.Value).ToList();
-                    previousOrder = e.Column;
-                }
+                results = results.OrderBy(x => x.pp[e.Column]).ToList();
             }
             Invoke(new Action(() => listView1.Items.Clear()));
             foreach (var item in results) {
-                ListViewItem listViewItem = new ListViewItem(item.Key);
-                listViewItem.SubItems.Add("" + item.Value);
+                ListViewItem listViewItem = new ListViewItem(item.name);
+                foreach (var result in results) {
+                    foreach (var pp in result.pp) {
+                        listViewItem.SubItems.Add("" + pp);
+                    }
+                }
                 Invoke(new Action(() => listView1.Items.Add(listViewItem)));
             }
         }

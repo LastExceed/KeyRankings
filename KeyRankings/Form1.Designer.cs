@@ -1,4 +1,4 @@
-﻿namespace KeySpecificRankings {
+﻿namespace KeyRankings {
     partial class Form1 {
         /// <summary>
         /// Required designer variable.
@@ -25,63 +25,47 @@
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.textBoxKey = new System.Windows.Forms.TextBox();
-            this.numericUpDownKeymode = new System.Windows.Forms.NumericUpDown();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button1 = new System.Windows.Forms.Button();
-            this.labelKeymode = new System.Windows.Forms.Label();
             this.labelTag = new System.Windows.Forms.Label();
             this.textBoxCountryTag = new System.Windows.Forms.TextBox();
             this.labelHint = new System.Windows.Forms.Label();
             this.progressBarUser = new System.Windows.Forms.ProgressBar();
             this.progressBarTotal = new System.Windows.Forms.ProgressBar();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownKeymode)).BeginInit();
             this.SuspendLayout();
             // 
             // textBoxKey
             // 
-            this.textBoxKey.Dock = System.Windows.Forms.DockStyle.Top;
             this.textBoxKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxKey.Location = new System.Drawing.Point(0, 0);
             this.textBoxKey.Name = "textBoxKey";
-            this.textBoxKey.Size = new System.Drawing.Size(195, 20);
+            this.textBoxKey.Size = new System.Drawing.Size(197, 20);
             this.textBoxKey.TabIndex = 1;
             this.textBoxKey.Text = "insert api key here";
             this.textBoxKey.Enter += new System.EventHandler(this.textBoxKey_Enter);
-            // 
-            // numericUpDownKeymode
-            // 
-            this.numericUpDownKeymode.Location = new System.Drawing.Point(58, 41);
-            this.numericUpDownKeymode.Maximum = new decimal(new int[] {
-            9,
-            0,
-            0,
-            0});
-            this.numericUpDownKeymode.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.numericUpDownKeymode.Name = "numericUpDownKeymode";
-            this.numericUpDownKeymode.Size = new System.Drawing.Size(27, 20);
-            this.numericUpDownKeymode.TabIndex = 1;
-            this.numericUpDownKeymode.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
             // 
             // listView1
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2});
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader7});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listView1.Location = new System.Drawing.Point(0, 101);
+            this.listView1.Location = new System.Drawing.Point(0, 80);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(195, 196);
+            this.listView1.Size = new System.Drawing.Size(752, 593);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -94,27 +78,43 @@
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "pp";
-            this.columnHeader2.Width = 87;
+            this.columnHeader2.Text = "4k";
+            this.columnHeader2.Width = 107;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "5k";
+            this.columnHeader3.Width = 117;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "6k";
+            this.columnHeader4.Width = 112;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "7k";
+            this.columnHeader5.Width = 111;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "8k";
+            this.columnHeader6.Width = 104;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "9k";
+            this.columnHeader7.Width = 118;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(85, 39);
+            this.button1.Location = new System.Drawing.Point(197, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(41, 23);
+            this.button1.Size = new System.Drawing.Size(168, 41);
             this.button1.TabIndex = 4;
             this.button1.Text = "Run";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // labelKeymode
-            // 
-            this.labelKeymode.AutoSize = true;
-            this.labelKeymode.Location = new System.Drawing.Point(0, 44);
-            this.labelKeymode.Name = "labelKeymode";
-            this.labelKeymode.Size = new System.Drawing.Size(53, 13);
-            this.labelKeymode.TabIndex = 7;
-            this.labelKeymode.Text = "keymode:";
             // 
             // labelTag
             // 
@@ -145,26 +145,26 @@
             // progressBarUser
             // 
             this.progressBarUser.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBarUser.Location = new System.Drawing.Point(0, 81);
+            this.progressBarUser.Location = new System.Drawing.Point(0, 60);
             this.progressBarUser.Name = "progressBarUser";
-            this.progressBarUser.Size = new System.Drawing.Size(195, 20);
+            this.progressBarUser.Size = new System.Drawing.Size(752, 20);
             this.progressBarUser.Step = 1;
             this.progressBarUser.TabIndex = 12;
             // 
             // progressBarTotal
             // 
             this.progressBarTotal.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBarTotal.Location = new System.Drawing.Point(0, 61);
+            this.progressBarTotal.Location = new System.Drawing.Point(0, 40);
             this.progressBarTotal.Maximum = 50;
             this.progressBarTotal.Name = "progressBarTotal";
-            this.progressBarTotal.Size = new System.Drawing.Size(195, 20);
+            this.progressBarTotal.Size = new System.Drawing.Size(752, 20);
             this.progressBarTotal.Step = 1;
             this.progressBarTotal.TabIndex = 13;
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(126, 45);
+            this.linkLabel1.Location = new System.Drawing.Point(371, 14);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(71, 13);
             this.linkLabel1.TabIndex = 14;
@@ -176,24 +176,21 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(195, 297);
+            this.ClientSize = new System.Drawing.Size(752, 673);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.progressBarTotal);
             this.Controls.Add(this.progressBarUser);
             this.Controls.Add(this.labelHint);
             this.Controls.Add(this.textBoxCountryTag);
             this.Controls.Add(this.labelTag);
-            this.Controls.Add(this.labelKeymode);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listView1);
-            this.Controls.Add(this.numericUpDownKeymode);
             this.Controls.Add(this.textBoxKey);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "KeyRankings";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownKeymode)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,18 +199,21 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBoxKey;
-        private System.Windows.Forms.NumericUpDown numericUpDownKeymode;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label labelKeymode;
         private System.Windows.Forms.Label labelTag;
         private System.Windows.Forms.TextBox textBoxCountryTag;
         private System.Windows.Forms.Label labelHint;
         private System.Windows.Forms.ProgressBar progressBarUser;
         private System.Windows.Forms.ProgressBar progressBarTotal;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
     }
 }
 
